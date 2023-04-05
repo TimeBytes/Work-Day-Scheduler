@@ -1,26 +1,17 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+//dayjs plugin for advanced format
 dayjs.extend(window.dayjs_plugin_advancedFormat);
+//localstorage empty object
 var localStorageObject = {};
 $(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
+  //add onclick event to the save button, targets the information in the text area and stores it to the local
+  //storage by creating event key based on the id of parent of the targeted element
   $(".saveBtn").on("click", function (event) {
     var btnClicked = $(this).parent().children("textarea").val();
     var idOfBtnClicked = $(this).parent().attr("id");
     localStorageObject[idOfBtnClicked] = btnClicked;
     localStorage.setItem("DaySchedule", JSON.stringify(localStorageObject));
   });
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
+  // loops through the containers using id as the selector checking from 9am - 5pm in 24hr clock and sets the background color
   for (let i = 9; i < 18; i++) {
     if (dayjs().format("HH") > i) {
       $("#hour-" + i).addClass("past");
@@ -30,9 +21,8 @@ $(function () {
       $("#hour-" + i).addClass("future");
     }
   }
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
+  //validates that there is data stored in local storage then loops though the object using it's key
+  //as the selector and changes the value of text area
   localStorageObject = JSON.parse(localStorage.getItem("DaySchedule"));
   if (localStorageObject == null) {
     localStorageObject = {};
@@ -43,6 +33,6 @@ $(function () {
         .val(localStorageObject[key]);
     });
   }
-  // TODO: Add code to display the current date in the header of the page.
+  // displays the date
   $("#currentDay").text(dayjs().format("dddd, MMMM, Do"));
 });

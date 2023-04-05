@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 
@@ -29,17 +29,17 @@ textarea {
   color: #000000;
   border-top: 1px dashed #000000;
 }
-
+/* color used to show hour blocks that past */
 .past {
   background-color: #d3d3d3;
   color: white;
 }
-
+/* color used to show hour block that is present */
 .present {
   background-color: #ff6961;
   color: white;
 }
-
+/* color used to show hour blocks that are future */
 .future {
   background-color: #77dd77;
   color: white;
