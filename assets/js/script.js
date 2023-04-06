@@ -5,7 +5,7 @@ var localStorageObject = {};
 $(function () {
   //add onclick event to the save button, targets the information in the text area and stores it to the local
   //storage by creating event key based on the id of parent of the targeted element
-  $(".saveBtn").on("click", function (event) {
+  $(".saveBtn").on("click", function () {
     var btnClicked = $(this).parent().children("textarea").val();
     var idOfBtnClicked = $(this).parent().attr("id");
     localStorageObject[idOfBtnClicked] = btnClicked;
